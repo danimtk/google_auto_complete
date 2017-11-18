@@ -13,10 +13,10 @@ Using MapReduce to implement Google Auto-Completion based on N-Gram Language Mod
 Wiki dataset (or any other corpus) --> <br/>N-Gram Library (Hadoop/MapReduce) --> <br/>Language Model (Hadoop/MapReduce) --> <br/>Database (MySQL) --> <br/>Web Interface (PHP/Ajax and jQuery)
 
 ## My Running Environment
-- Docker
-- Hadoop
-- MySQL
-- Apache
+- <b>Docker</b>
+- <b>Hadoop</b>
+- <b>MySQL</b>
+- <b>Apache</b>
 
 ## Citation
 ```
