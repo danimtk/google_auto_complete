@@ -1,14 +1,15 @@
+hdfs dfs -rm -r /mysql
+hdfs dfs -mkdir /mysql
+
 file="../dependency/mysql-connector-java-5.1.39-bin.jar"
 if [ -f "$file" ]
 then
     echo "$file found."
+    hdfs dfs -put ../dependency/mysql-connector-java-*.jar /mysql/
 else
     wget -c https://s3-us-west-2.amazonaws.com/wengaoye/mysql-connector-java-5.1.39-bin.jar
+    hdfs dfs -put ./mysql-connector-java-*.jar /mysql/
 fi
-
-hdfs dfs -rm -r /mysql
-hdfs dfs -mkdir /mysql
-hdfs dfs -put ../dependency/mysql-connector-java-*.jar /mysql/
 
 hdfs dfs -rm -r /input
 hdfs dfs -mkdir /input
