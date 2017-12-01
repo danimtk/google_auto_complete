@@ -2,7 +2,7 @@
 
 Using MapReduce to implement Google Auto-Completion based on N-Gram Language Model.
 <div align="center">
- <img src="https://github.com/elleryqueenhomels/google_auto_complete/blob/master/demo/demo.gif" height="284px">
+  <img src="https://user-images.githubusercontent.com/13844740/33495739-90d08e48-d702-11e7-8309-74bd821b5110.gif" height="284px">
 </div>
 
 ## Description
