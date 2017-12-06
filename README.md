@@ -6,7 +6,7 @@ Using MapReduce to implement Google Auto-Completion based on N-Gram Language Mod
 </div>
 
 ## Description
-- Step 1: Build <b>N-Gram</b> library over Wiki dataset, then build <b>Language Model</b> based on <b>statistical probability distribution</b>, generate structured data and store it in database. Implemented by two <b>MapReduce</b> data pipeline.
+- Step 1: Build <b>N-Gram</b> library over Wiki dataset, then build <b>Language Model</b> based on <b>statistical probability distribution</b>, generate structured data and store it in database.
 - step 2: Using <b>PHP/Ajax</b> and <b>jQuery</b> to retrieve data from database to implement <b>real-time</b> auto-completion. Then display the auto-complete features of <b>search engine</b> on web page just like Google does.
 
 ## WorkFlow
