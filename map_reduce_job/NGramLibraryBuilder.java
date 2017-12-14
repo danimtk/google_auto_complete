@@ -34,7 +34,11 @@ public class NGramLibraryBuilder {
             String[] words = line.trim().split("\\s+");
 
             if (words.length < 2) {
-                throw new IOException("The length of words array is less than 2.");
+                String info = String.format(
+                    "Warning: The length of words array is %d. Requires at least 2. Origin line: %s", 
+                    words.length, line);
+                context.getCounter("Warnings", info);
+                return;
             }
 
             StringBuilder sb;
