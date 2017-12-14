@@ -29,7 +29,11 @@ public class LanguageModel {
                 throws IOException, InterruptedException {
 
             if (value == null || value.toString().trim().length() == 0) {
-                throw new IOException("Value is null or value contains nothing.");
+                String info = String.format(
+                    "Warning: Value is null or value contains nothing. Origin line: %s", 
+                    value.toString());
+                context.getCounter("Warnings", info);
+                return;
             }
 
             String line = value.toString().trim();
@@ -37,7 +41,11 @@ public class LanguageModel {
             String[] wordsAndCount = line.split("\t");
 
             if (wordsAndCount.length < 2) {
-                throw new IOException("The length of wordsAndCount is less than 2.");
+                String info = String.format(
+                    "Warning: The length of wordsAndCount is %d. Requires at least 2. Origin line: %s", 
+                    wordsAndCount.length, line);
+                context.getCounter("Warnings", info);
+                return;
             }
             
             String phrase = wordsAndCount[0].trim();
@@ -53,7 +61,11 @@ public class LanguageModel {
             String following_word = phrase.substring(lastSpaceIndex + 1);
 
             if (starting_phrase == null || starting_phrase.length() == 0) {
-                throw new IOException("Starting phrase is null or its length equals to 0.");
+                String info = String.format(
+                    "Warning: Starting phrase is null or its length equals to 0. Origin line: %s", 
+                    line);
+                context.getCounter("Warnings", info);
+                return;
             }
 
             context.write(new Text(starting_phrase), new Text(following_word + '=' + count));
@@ -90,18 +102,21 @@ public class LanguageModel {
                 }
             }
 
-            PriorityQueue<Node> heap = new PriorityQueue<Node>(map.size(), new Comparator<Node>() {
+            PriorityQueue<Node> heap = new PriorityQueue<Node>(topK + 1, new Comparator<Node>() {
                 @Override
                 public int compare(Node e1, Node e2) {
-                    return e2.count - e1.count;
+                    return e1.count - e2.count;
                 }
             });
 
             for (int count : map.keySet()) {
                 heap.offer(new Node(count, map.get(count)));
+                if (heap.size() > topK) {
+                    heap.poll();
+                }
             }
 
-            for (int i = 0; i < topK && !heap.isEmpty(); ++i) {
+            while (!heap.isEmpty()) {
                 Node top = heap.poll();
 
                 int keyCount = top.count;
