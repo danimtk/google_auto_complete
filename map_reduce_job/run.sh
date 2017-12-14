@@ -14,7 +14,6 @@ fi
 hdfs dfs -rm -r /input
 hdfs dfs -mkdir /input
 hdfs dfs -rm -r /output
-hdfs dfs -mkdir /output
 hdfs dfs -put ../dataset/* /input/
 
 hadoop com.sun.tools.javac.Main *.java
